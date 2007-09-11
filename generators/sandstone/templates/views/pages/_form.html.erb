@@ -1,0 +1,59 @@
+<%= error_messages_for :page %>
+
+<% form_for(page) do |f| %>
+<div>
+  <label for="page_path">Page URL</label>
+  http://qvisory.org/<%= f.text_field :path %>
+</div>
+
+<div>
+  <label for="page_parent_id">Parent Page</label>
+  <%= f.select :parent_id, parent_pages_for(page), :include_blank => true %>
+</div>
+<div>
+  <label for="page_page_template_id">Template</label>
+  <%= f.select :page_template_id, templates, :include_blank => true %>
+</div>
+
+<div>
+  <label for="page_title">Title</label>
+  <%= f.text_field :title %>
+</div>
+
+<div>
+  <label for="page_content">Content</label>
+  <%= f.text_area :content %>
+</div>
+
+<div>
+  <%= f.submit "Save as Draft", :name => 'page[draft]' %>
+  <%= f.submit "Save and Submit For Approval", :name => 'page[approve]' %>
+  <%= f.submit "Publish", :name => 'page[publish]' if editor.manager? %>
+  <%= link_to_function 'preview', "new Ajax.Request('#{sandstone_preview_url}', {
+    asynchronous:true, 
+    evalScripts:true, 
+    method:'post', 
+    parameters:Form.serialize(this.parentNode.parentNode),
+    onComplete:function(response) {
+      var popup = window.open('', 'previewWindow');
+      popup.document.write(response.responseText);
+      popup.document.close();
+    }
+  })" %>
+</div>
+
+<div class="additional-fields">
+  <p><%= link_to_function 'edit page metadata', 'new Effect.Appear("page-metadata")' %></p>
+  <fieldset id="page-metadata" style="display:none;">
+    <div>
+      <label for="page_meta_description">Description</label>
+      <%= f.text_area :meta_description, :class => 'small' %>
+    </div>
+
+    <div>
+      <label for="page_meta_keywords">Keywords</label>
+      <%= f.text_area :meta_keywords, :class => 'small' %>
+    </div>
+  </fieldset>
+</div>
+<% end %>

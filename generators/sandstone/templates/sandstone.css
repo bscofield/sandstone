@@ -1,0 +1,160 @@
+body { background-color: #fff; color: #333; }
+
+body, p, ol, ul, td {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size:   13px;
+  line-height: 18px;
+}
+
+pre {
+  background-color: #eee;
+  padding: 10px;
+  font-size: 11px;
+}
+
+a { 
+  color: #900; 
+  padding: 0 1px;
+}
+a:hover { 
+  background-color:#900; 
+  color: #fff; 
+}
+
+.fieldWithErrors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+#errorExplanation {
+  width: 400px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+
+#errorExplanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px;
+  background-color: #c00;
+  color: #fff;
+}
+
+#errorExplanation p {
+  color: #333;
+  margin-bottom: 0;
+  padding: 5px;
+}
+
+#errorExplanation ul li {
+  font-size: 12px;
+  list-style: square;
+}
+
+
+
+p.notice {
+  background-color: #ff9;
+  border: 2px solid #f90;
+  padding: 10px;
+}
+
+ul.admin-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+ul.admin-list a {
+  font-size: 15px;
+  font-weight: bold;
+}
+ul.admin-list span.url {
+  color: #666;
+  font-size : 11px;
+  text-transform: lowercase;
+}
+ul.admin-list span.actions {
+  color: #666;
+  display: block;
+  font-size : 11px;
+  padding-left: 20px;
+  text-transform: lowercase;
+}
+ul.admin-list span.actions a {
+  font-size : 11px;
+  font-weight: normal;
+}
+label {
+  display: block;
+  font-weight: bold;
+}
+form div {
+  padding-top: 10px;
+}
+
+ul.subpage-list {
+  background-color: #ddd;
+  list-style-type: none;
+  padding: 0 0 0 20px;
+}
+
+div#header {
+  border-bottom: 1px solid #900;
+  margin-bottom: 10px;
+}
+
+div#main {
+  width: 70%;
+}
+
+div#sidebar {
+  float: right;
+  width: 25%;
+}
+div#sidebar ul {
+  line-height: 20px;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+body.advocacy {
+  background-color: black;
+  color: white;
+}
+
+form textarea {
+  height: 280px;
+  width: 100%;
+}
+form textarea.small {
+  height: 80px;
+}
+
+div.clear {
+  clear: both;
+}
+
+div#preview-frame {
+  border: 1px solid black;
+}
+
+div.versioning {
+  color : #666;
+  font-size: 11px;
+}
+div.versioning .current {
+  display: block;
+}
+
+div.additional-fields {
+  padding-top: 20px;
+}
+div.additional-fields fieldset {
+  margin-bottom: 50px;
+}

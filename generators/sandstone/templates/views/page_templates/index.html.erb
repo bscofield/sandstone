@@ -1,0 +1,7 @@
+<ul class="admin-list">
+<%= render :partial => 'template_listing', :collection => @page_templates %>
+</ul>
+
+<% content_for :sidebar do %>
+<li><%= link_to 'Create a Template', new_page_template_path %></li>
+<% end %>

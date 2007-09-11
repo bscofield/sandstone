@@ -1,0 +1,11 @@
+<div class="versioning">
+  viewing version
+  <%= select_tag 'version', options_for_select(@page.versions.map {|v| ["v#{v.version} - #{v.updated_at.to_s(:short)}", v.version]}.reverse, @page.version),
+      :onchange => "location.href = '#{edit_page_path}?version='+this.options[this.selectedIndex].value;" %>
+</div>
+
+<%= render :partial => 'form', :locals => {:page => @page} %>
+
+<% content_for :sidebar do %>
+<li><%= link_to 'View', sandstone_url(:path => @page.path.split('/')) %></li>
+<% end %>

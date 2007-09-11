@@ -1,0 +1,7 @@
+<ul class="admin-list">
+<%= render :partial => 'page_listing', :collection => @pages %>
+</ul>
+
+<% content_for :sidebar do %>
+<li><%= link_to 'Create a Page', new_page_path %></li>
+<% end %>

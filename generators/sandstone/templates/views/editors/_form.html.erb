@@ -1,0 +1,17 @@
+<%= error_messages_for :editor %>
+
+<% form_for(editor) do |f| %>
+<div>
+  <label for="editor_user_id">Account</label>
+  <%= f.select :user_id, potential_editors, :include_blank => true %>
+</div>
+
+<div>
+  <label for="editor_role">Role</label>
+  <%= f.select :role, Editor::ROLES %>
+</div>
+
+<div>
+  <%= f.submit "Save" %>
+</div>
+<% end %>

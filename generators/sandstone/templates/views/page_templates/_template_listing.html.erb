@@ -1,0 +1,8 @@
+<li>
+  <%= h template_listing.name %>
+
+  <span class="actions">
+    <%= link_to 'edit', edit_page_template_path(template_listing) %> |
+    <%= link_to 'delete', template_listing, :confirm => 'Are you sure?', :method => :delete %>
+  </span>
+</li>

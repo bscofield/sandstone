@@ -1,0 +1,7 @@
+<li>
+  <%= h editor_listing.to_s %>
+  <span class="actions">
+    <%= link_to 'edit', edit_editor_path(editor_listing) %> |
+    <%= link_to 'delete', editor_listing, :confirm => 'Are you sure?', :method => :delete %>
+  </span>
+</li>

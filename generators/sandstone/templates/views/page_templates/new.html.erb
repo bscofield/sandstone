@@ -1,0 +1,17 @@
+<%= error_messages_for :page_template %>
+
+<% form_for(@page_template) do |f| %>
+  <p>
+    <b>Name</b><br />
+    <%= f.text_field :name %>
+  </p>
+
+  <p>
+    <b>Content</b><br />
+    <%= f.text_area :content %>
+  </p>
+
+  <p>
+    <%= f.submit "Create" %>
+  </p>
+<% end %>

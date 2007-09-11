@@ -1,0 +1,7 @@
+<ul class="admin-list">
+<%= render :partial => 'editor_listing', :collection => @editors %>
+</ul>
+
+<% content_for :sidebar do %>
+<li><%= link_to 'Add an Editor', new_editor_path %></li>
+<% end %>
