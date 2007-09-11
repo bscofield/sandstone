@@ -19,6 +19,7 @@ Sandstone uses polymorphism to link editors with your user model. To activate th
 
   has_one :editor, :dependent => :destroy, :as => :user
 
+Whatever user model you use, it should respond to a request for +name+ - that's what the Sandstone admin interface displays for its editors. Note that this means you'll have to add a name method or column to your User model if you're running RESTful Authentication.
 
 Controllers
 ===========
