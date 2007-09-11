@@ -1,4 +1,5 @@
 class EditorsController < ApplicationController
+  layout 'sandstone'
   include Sandstone::EditorSystem
   
   before_filter :require_sandstone_manager, :except => :show

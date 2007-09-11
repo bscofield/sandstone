@@ -49,6 +49,12 @@ class SandstoneGenerator < Rails::Generator::Base
         
       end
       
+      # Handle layouts
+      m.file(File.join('views', 'layouts', 'sandstone.html.erb'),
+        File.join('app', 'views', 'layouts', 'sandstone.html.erb'))
+      m.file(File.join('views', 'layouts', 'public.html.erb'),
+        File.join('app', 'views', 'layouts', 'public.html.erb'))
+
       # Handle individual files
       m.file(File.join('sandstone.css'),
         File.join('app', '..', 'public', 'stylesheets', 'sandstone.css'))
