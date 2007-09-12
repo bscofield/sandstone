@@ -6,7 +6,7 @@ Introduction goes here.
 
 Dependencies
 ============
-While it may be optional in a future release, you must have acts_as_versioned installed to use Sandstone.
+You must be running acts_as_versioned and acts_as_tree to use Sandstone.
 
 You do not need to use the RESTful Authentication plugin to use Sandstone, but it will help. At a mininum, you must define the methods +logged_in?+, +current_user+, and +access_denied+ in +ApplicationController+. 
 
