@@ -50,10 +50,19 @@ class SandstoneGenerator < Rails::Generator::Base
       end
       
       # Handle layouts
-      m.file(File.join('views', 'layouts', 'sandstone.html.erb'),
-        File.join('app', 'views', 'layouts', 'sandstone.html.erb'))
-      m.file(File.join('views', 'layouts', 'public.html.erb'),
-        File.join('app', 'views', 'layouts', 'public.html.erb'))
+      m.directory(File.join('app', 'views', 'layouts'))
+      layout_dir = File.join('views', 'layouts')
+      Dir.glob(File.join(template_dir, layout_dir, '*')).each do |file|
+        m.file(File.join(layout_dir, File.basename(file)), 
+          File.join('app', layout_dir, File.basename(file)))
+      end
+      
+      # Handle models
+      model_dir = File.join('models')
+      Dir.glob(File.join(template_dir, model_dir, '*')).each do |file|
+        m.file(File.join(model_dir, File.basename(file)), 
+          File.join('app', 'models', File.basename(file)))
+      end
 
       # Handle individual files
       m.file(File.join('sandstone.css'),

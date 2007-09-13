@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   layout 'sandstone'
-  include Sandstone::PageSystem
+  include Sandstone::Controllers::Pages
   
   before_filter :require_sandstone_editor, :except => [:show, :destroy]
   before_filter :require_sandstone_manager, :only => :destroy
