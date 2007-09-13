@@ -38,11 +38,11 @@ module Sandstone
       end
 
       module ClassMethods
-        def self.find_roots
+        def find_roots
           find(:all, :conditions => {:parent_id => nil}, :include => :page_template)
         end
 
-        def self.find_pending
+        def find_pending
           find_all_by_status('pending')
         end
       end

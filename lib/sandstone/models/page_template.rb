@@ -5,7 +5,7 @@ module Sandstone
 
       def self.included(base)
         base.class_eval do
-          acts_as_versioned
+          self.acts_as_versioned
 
           has_many :pages, :dependent => :nullify
           has_many :audits, :as => :record, :dependent => :destroy

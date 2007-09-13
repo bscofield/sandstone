@@ -12,7 +12,7 @@ module Sandstone
       end
 
       module ClassMethods
-        def self.log(event, editor, record = nil, details = nil)
+        def log(event, editor, record = nil, details = nil)
           attributes = {:event => event, :editor => editor}
           attributes[:details] = details if details
           attributes[:record] = record if record
