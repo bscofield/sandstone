@@ -1,5 +1,5 @@
 module Sandstone
-  module Modules
+  module Models
     module Editor
       ROLES = ['author', 'manager']
 
