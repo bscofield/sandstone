@@ -38,8 +38,10 @@ module Sandstone
       end
 
       module ClassMethods
-        def find_roots
-          find(:all, :conditions => {:parent_id => nil}, :include => :page_template)
+        def find_roots(published_only = false)
+          conditions = {:parent_id => nil}
+          conditions[:status] = 'published' if published_only
+          find(:all, {:conditions => conditions, :include => :page_template})
         end
 
         def find_pending

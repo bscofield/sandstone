@@ -1,0 +1,9 @@
+<h1>Sitemap</h1>
+
+<% unless @pages.empty? -%>
+<ul>
+<%= render :partial => 'sitemaps/detail', :collection => @pages %>
+</ul>
+<% else %>
+<p>No pages have been created yet</p>
+<% end %>
