@@ -6,14 +6,19 @@
   http://qvisory.org/<%= f.text_field :path %>
 </div>
 
+<% if Page.count > 0 -%>
 <div>
   <label for="page_parent_id">Parent Page</label>
   <%= f.select :parent_id, parent_pages_for(page), :include_blank => true %>
 </div>
+<% end -%>
+
+<% if templates.size > 0 -%>
 <div>
   <label for="page_page_template_id">Template</label>
   <%= f.select :page_template_id, templates, :include_blank => true %>
 </div>
+<% end -%>
 
 <div>
   <label for="page_title">Title</label>
