@@ -38,7 +38,8 @@ You must add the following routes (or similar ones) to your config/routes.rb fil
   map.resources :editors
   map.resources :pages
   map.resources :page_templates
-  map.sandstone_preview 'preview', :controller => 'preview', :action => 'show'
+  map.resource  :preview
+  map.resource  :sitemap
   map.sandstone '*path', :controller => 'pages', :action => 'show'
 
 

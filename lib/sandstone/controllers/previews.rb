@@ -1,6 +1,6 @@
 module Sandstone
   module Controllers
-    module Preview
+    module Previews
       def show
         @page = Page.new(params[:page])
         template = !params[:page][:page_template_id].blank? ?

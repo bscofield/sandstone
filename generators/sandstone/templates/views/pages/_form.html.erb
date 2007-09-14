@@ -34,7 +34,7 @@
   <%= f.submit "Save as Draft", :name => 'page[draft]' %>
   <%= f.submit "Save and Submit For Approval", :name => 'page[approve]' %>
   <%= f.submit "Publish", :name => 'page[publish]' if editor.manager? %>
-  <%= link_to_function 'preview', "new Ajax.Request('#{sandstone_preview_url}', {
+  <%= link_to_function 'preview', "new Ajax.Request('#{preview_url}', {
     asynchronous:true, 
     evalScripts:true, 
     method:'post', 
