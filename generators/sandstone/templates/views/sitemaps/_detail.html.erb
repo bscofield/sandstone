@@ -1,8 +1,4 @@
 <li>
   <%= link_to (h detail.title), detail.path %>
-  <% unless detail.children.empty? %>
-  <ul>
-    <%= render :partial => 'sitemaps/detail', :collection => detail.children %>
-  </ul>
-  <% end -%>
+  <%= render_children(detail) %>
 </li>

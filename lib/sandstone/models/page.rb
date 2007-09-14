@@ -3,6 +3,8 @@ module Sandstone
     module Page
       def self.included(base)
         base.class_eval do
+          after_save :retire_old_published_versions
+
           self.acts_as_versioned
           acts_as_tree
 
@@ -35,13 +37,19 @@ module Sandstone
         def publish=(value)
           self.status = 'published'
         end
+
+        def retire_old_published_versions
+          self.versions.update_all('status = "retired"', ['version < ? AND status = ?', self.version, 'published']) if self.status == 'published'
+        end
       end
 
       module ClassMethods
         def find_roots(published_only = false)
-          conditions = {:parent_id => nil}
-          conditions[:status] = 'published' if published_only
-          find(:all, {:conditions => conditions, :include => :page_template})
+          unless published_only
+            find(:all, :conditions => {:parent_id => nil}, :include => :page_template)
+          else
+            ::Page::Version.find(:all, :conditions => {:parent_id => nil, :status => 'published'})
+          end
         end
 
         def find_pending
