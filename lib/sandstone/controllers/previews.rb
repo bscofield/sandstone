@@ -1,7 +1,7 @@
 module Sandstone
   module Controllers
     module Previews
-      def show
+      def update
         @page = Page.new(params[:page])
         template = !params[:page][:page_template_id].blank? ?
         PageTemplate.find(params[:page][:page_template_id]).name.tableize : 

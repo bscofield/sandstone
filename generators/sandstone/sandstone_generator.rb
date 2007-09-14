@@ -28,7 +28,7 @@ class SandstoneGenerator < Rails::Generator::Base
     template_dir = File.join(File.dirname(__FILE__), 'templates')
     
     record do |m|
-      %w(editors page_templates pages preview).each do |system|
+      %w(editors page_templates pages previews sitemaps).each do |system|
 
         # Handle controllers and helpers
         %w(controller helper).each do |area|
