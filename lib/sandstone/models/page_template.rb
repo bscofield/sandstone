@@ -21,7 +21,7 @@ module Sandstone
       module InstanceMethods
         private
         def layout_filename 
-          "#{LAYOUT_PATH}/#{name.tableize}.html.erb"
+          "#{::PageTemplate::LAYOUT_PATH}/#{name.tableize}.html.erb"
         end
 
         def create_file_on_filesystem
