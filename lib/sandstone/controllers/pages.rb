@@ -34,7 +34,10 @@ module Sandstone
 
         if @page.save
           Audit.log('create', editor, @page)
-          flash[:notice] = 'Page was successfully created.'
+          
+          flash[:notice] = Page::EXPLICIT_ROUTES.include?("/#{@page.path}") ? 
+            'Path already exists in system - page was created for sitemap only' :
+            'Page was successfully created.'
           redirect_to workspace_path
         else
           render :action => "new"
@@ -46,7 +49,10 @@ module Sandstone
 
         if @page.update_attributes(params[:page].merge(:editor => editor))
           Audit.log('update', editor, @page)
-          flash[:notice] = 'Page was successfully updated.'
+
+          flash[:notice] = Page::EXPLICIT_ROUTES.include?("/#{@page.path}") ? 
+            'Path already exists in system - page was updated for sitemap only' :
+            'Page was successfully updated.'
           redirect_to workspace_path
         else
           render :action => "edit" 
