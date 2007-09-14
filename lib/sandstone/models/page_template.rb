@@ -1,8 +1,6 @@
 module Sandstone
   module Models
     module PageTemplate
-      LAYOUT_PATH = "#{File.dirname(__FILE__)}/../views/layouts"
-
       def self.included(base)
         base.class_eval do
           self.acts_as_versioned
