@@ -7,8 +7,8 @@
   <title>SANDSTONE<%= " :: #{@page_title.downcase}" if @page_title %></title>
   <%= stylesheet_link_tag 'sandstone' %>
   <%= javascript_include_tag :defaults %>
-  <%= tag :meta, :name => 'description', :content => @page.meta_description if @page.meta_description %>
-  <%= tag :meta, :name => 'keywords',    :content => @page.meta_keywords    if @page.meta_keywords %>
+  <%= tag :meta, :name => 'description', :content => @page.meta_description if @page && @page.meta_description %>
+  <%= tag :meta, :name => 'keywords',    :content => @page.meta_keywords    if @page && @page.meta_keywords %>
 </head>
 <body>
 

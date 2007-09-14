@@ -1,4 +1,4 @@
-class SitemapController < ApplicationController
+class SitemapsController < ApplicationController
   layout 'public'
-  include Sandstone::Controllers::Sitemap
+  include Sandstone::Controllers::Sitemaps
 end
