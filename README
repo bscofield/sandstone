@@ -32,9 +32,10 @@ If you want to audit editor logins, you should add +Audit.log('login', editor)+ 
 
 Routes
 ======
-You must add the following routes (or similar ones) to your config/routes.rb file. Note that +map.sandstone '*path'+ is a catch-all route, so if you're relying on the standard Rails default route (+':controller/:action/:id') you may have to do some more work to get Sandstone running.
+You must add the following routes (or similar ones) to your config/routes.rb file. Note that +map.sandstone '*path'+ is a catch-all route, so if you're relying on the standard Rails default route (+':controller/:action/:id'+) you may have to do some more work to get Sandstone running.
 
   map.workspace 'editor/home', :controller => 'editors', :action => 'show'
+  map.resources :audits
   map.resources :editors
   map.resources :pages
   map.resources :page_templates

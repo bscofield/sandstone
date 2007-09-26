@@ -8,8 +8,11 @@ module Sandstone
       end
 
       def show
-        @page = Page.find_by_path(params[:path].join('/'))
-        current = @page.versions.find_by_status('published', :order => 'version DESC') if @page
+        @page = Page.find_by_path(params[:path].join('/')) 
+        current = @page.versions.find_by_status('published', :order => 'version DESC',
+          :conditions => ['(active_at IS NULL and expires_at >= ?) OR (active_at <= ? AND expires_at IS NULL) OR (? BETWEEN active_at AND expires_at)', Time.now, Time.now, Time.now]
+        ) if @page
+        
         if current
           @page.revert_to(current.version)
           render :layout => @page.layout
@@ -26,7 +29,11 @@ module Sandstone
 
       def edit
         @page_title = 'Edit a Page'
-        @page.revert_to(params[:version]) if params[:version]
+        if params[:version]
+          @page.revert_to(params[:version])
+        else
+          @page.load_content_from_filesystem
+        end
       end
 
       def create
@@ -46,8 +53,10 @@ module Sandstone
 
       def update
         @page = Page.find(params[:id])
-
-        if @page.update_attributes(params[:page].merge(:editor => editor))
+        page_params = params[:page]
+        page_params.merge(:editor => editor) unless page_params[:editor_id]
+        
+        if @page.update_attributes(page_params)
           Audit.log('update', editor, @page)
 
           flash[:notice] = Page::EXPLICIT_ROUTES.include?("/#{@page.path}") ? 

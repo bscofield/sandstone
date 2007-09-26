@@ -28,47 +28,30 @@ class SandstoneGenerator < Rails::Generator::Base
     template_dir = File.join(File.dirname(__FILE__), 'templates')
     
     record do |m|
-      %w(editors page_templates pages previews sitemaps).each do |system|
-
-        # Handle controllers and helpers
-        %w(controller helper).each do |area|
-          file = File.join(area.pluralize, "#{system}_#{area}.rb")
-          m.file(file, File.join('app', file))
+      Dir.chdir(template_dir) do
+        
+        # handle models, controllers, helpers, and views
+        %w(models controllers helpers views).each do |area|
+          m.directory(File.join('app', area))
+          Dir.glob(File.join(area, '**', '*')).each do |file|
+            m.directory(File.join('app', file)) if File.directory?(file)
+            m.file(file, File.join('app', file)) if File.file?(file)
+          end
         end
                 
-        # Handle views
-        view_dir = File.join('views', system)
-        app_view_dir = File.join('app', view_dir)
-        
-        m.directory(app_view_dir)
-        
-        Dir.glob(File.join(template_dir, view_dir, '*')).each do |file|
-          m.file(File.join(view_dir, File.basename(file)), 
-            File.join(app_view_dir, File.basename(file)))
+        # handle tests
+        m.directory('test')
+        Dir.glob(File.join('test', '**', '*')).each do |file|
+          m.directory(file) if File.directory?(file)
+          m.file(file, file) if File.file?(file)
         end
-        
       end
       
-      # Handle layouts
-      m.directory(File.join('app', 'views', 'layouts'))
-      layout_dir = File.join('views', 'layouts')
-      Dir.glob(File.join(template_dir, layout_dir, '*')).each do |file|
-        m.file(File.join(layout_dir, File.basename(file)), 
-          File.join('app', layout_dir, File.basename(file)))
-      end
-      
-      # Handle models
-      model_dir = File.join('models')
-      Dir.glob(File.join(template_dir, model_dir, '*')).each do |file|
-        m.file(File.join(model_dir, File.basename(file)), 
-          File.join('app', 'models', File.basename(file)))
-      end
+      # Create directory for cached CMS pages
+      m.directory('app/views/pages/generated')
 
-      # Handle individual files
-      m.file(File.join('sandstone.css'),
-        File.join('app', '..', 'public', 'stylesheets', 'sandstone.css'))
-      m.file(File.join('helpers', 'sandstone_helper.rb'),
-        File.join('app', 'helpers', 'sandstone_helper.rb'))
+      # Handle CSS
+      m.file('sandstone.css', 'public/stylesheets/sandstone.css')
 
       # Handle migrations
       Dir.glob(File.join(template_dir, 'migrate', '*')).each do |file|

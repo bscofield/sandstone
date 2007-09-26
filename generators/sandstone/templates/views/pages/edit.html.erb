@@ -1,6 +1,6 @@
 <div class="versioning">
   viewing version
-  <%= select_tag 'version', options_for_select(@page.versions.map {|v| ["v#{v.version} - #{v.updated_at.to_s(:short)}", v.version]}.reverse, @page.version),
+  <%= select_tag 'version', versions_for(@page),
       :onchange => "location.href = '#{edit_page_path}?version='+this.options[this.selectedIndex].value;" %>
 </div>
 

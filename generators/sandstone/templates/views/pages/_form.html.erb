@@ -6,19 +6,21 @@
   http://qvisory.org/<%= f.text_field :path %>
 </div>
 
-<% if Page.count > 0 -%>
+<% if editor.manager? && !page.new_record? -%>
 <div>
-  <label for="page_parent_id">Parent Page</label>
-  <%= f.select :parent_id, parent_pages_for(page), :include_blank => true %>
+  <label for="page_editor_id">Assigned To</label>
+  <%= f.select :editor_id, editors_for(page) %>
 </div>
 <% end -%>
 
-<% if templates.size > 0 -%>
+<div>
+  <label for="page_parent_id">Parent Page</label>
+  <%= f.select :parent_id, parent_pages_for(page) %>
+</div>
 <div>
   <label for="page_page_template_id">Template</label>
-  <%= f.select :page_template_id, templates, :include_blank => true %>
+  <%= f.select :page_template_id, templates %>
 </div>
-<% end -%>
 
 <div>
   <label for="page_title">Title</label>
@@ -45,6 +47,21 @@
       popup.document.close();
     }
   })" %>
+</div>
+
+<div class="additional-fields">
+  <p><%= link_to_function 'manage expiration', 'new Effect.Appear("page-expiration")' %></p>
+  <fieldset id="page-expiration" style="display:none;">
+    <div>
+      <label for="page_active_at">Active at</label>
+      <%= f.text_field :active_at %>
+    </div>
+
+    <div>
+      <label for="page_expires_at">Expires at</label>
+      <%= f.text_field :expires_at %>
+    </div>
+  </fieldset>
 </div>
 
 <div class="additional-fields">

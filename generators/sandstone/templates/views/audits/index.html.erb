@@ -1,0 +1,10 @@
+<ul class="admin-list">
+<% @audits.each do |audit| -%>
+<li>
+  <%= audit.created_at.to_s(:short) %>
+  <%= audit.editor.user.name %>
+  <%= audit.event %>
+  <%= audit.record ? h(audit.record.title) : '-' %>
+</li>
+<% end -%>
+</ul>

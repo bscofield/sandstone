@@ -11,6 +11,8 @@ class CreatePages < ActiveRecord::Migration
         t.text     :content,          :null => true
         t.text     :meta_description, :null => true
         t.text     :meta_keywords,    :null => true
+        t.datetime :active_at,        :null => true
+        t.datetime :expires_at,       :null => true
         t.datetime :created_at
         t.datetime :updated_at
         t.datetime :deleted_at,       :null => true
