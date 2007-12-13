@@ -9,6 +9,7 @@ class CreatePages < ActiveRecord::Migration
         t.string   :path
         t.string   :title,            :null => true
         t.text     :content,          :null => true
+        t.text     :summary,          :null => true
         t.text     :meta_description, :null => true
         t.text     :meta_keywords,    :null => true
         t.datetime :active_at,        :null => true
