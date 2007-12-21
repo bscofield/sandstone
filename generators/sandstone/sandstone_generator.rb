@@ -49,6 +49,7 @@ class SandstoneGenerator < Rails::Generator::Base
       
       # Create directory for cached CMS pages
       m.directory('app/views/pages/generated')
+      m.directory('app/views/layouts/generated')
 
       # Handle CSS
       m.file('sandstone.css', 'public/stylesheets/sandstone.css')

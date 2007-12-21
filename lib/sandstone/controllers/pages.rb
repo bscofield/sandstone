@@ -10,7 +10,7 @@ module Sandstone
       def show
         @page = Page.find_by_path(params[:path].join('/')) 
         current = @page.versions.find_by_status('published', :order => 'version DESC',
-          :conditions => ['(active_at IS NULL and expires_at >= ?) OR (active_at <= ? AND expires_at IS NULL) OR (? BETWEEN active_at AND expires_at)', Time.now, Time.now, Time.now]
+          :conditions => ['(active_at IS NULL AND expires_at IS NULL) OR (active_at IS NULL and expires_at >= ?) OR (active_at <= ? AND expires_at IS NULL) OR (? BETWEEN active_at AND expires_at)', Time.now, Time.now, Time.now]
         ) if @page
         
         if current

@@ -15,9 +15,17 @@ You do not need to use the RESTful Authentication plugin to use Sandstone, but i
 
 Models
 ======
-Sandstone uses polymorphism to link editors with your user model. To activate the link, you'll have to add the following line to your user (account, member, etc.) model:
+Sandstone hooks into your application through a user model. If your users are actually represented by a model named User, you're in luck - all you have to do is add the following line to user.rb:
 
-  has_one :editor, :dependent => :destroy, :as => :user
+  has_one :editor
+  
+It's a little trickier if you've named the model something else (like Member). In that case, add this to your existing model:
+
+  has_one :editor, :foreign_key => :user_id
+  
+And update editor.rb with the name of your model:
+
+  belongs_to :user, :class_name => "PUT YOUR CLASS NAME HERE"
 
 Whatever user model you use, it should respond to a request for +name+ - that's what the Sandstone admin interface displays for its editors. Note that this means you'll have to add a name method or column to your User model if you're running RESTful Authentication.
 

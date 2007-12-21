@@ -5,7 +5,6 @@ module Sandstone
 
       def self.included(base)
         base.class_eval do
-          belongs_to :user, :polymorphic => true
           has_many :pages, :dependent => :nullify
           has_many :events, :class_name => 'Audit', :dependent => :destroy
           has_many :audits, :as => :record, :dependent => :destroy

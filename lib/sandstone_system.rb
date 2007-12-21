@@ -1,7 +1,7 @@
 module SandstoneSystem
   protected
   def editor
-    Editor.find_by_user_id(current_user.id) if current_user
+    current_user.editor if current_user != :false
   end
 
   private

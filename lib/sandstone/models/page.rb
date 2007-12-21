@@ -2,13 +2,13 @@ module Sandstone
   module Models
     module Page
       PAGE_PATH = "#{RAILS_ROOT}/app/views/pages/generated"
-      EXPLICIT_ROUTES = ActionController::Routing::Routes.routes.inject([]) { |array, r| array << r.segments.inject("") { |str,s| str << s.to_s }}
+      EXPLICIT_ROUTES = ActionController::Routing::Routes.routes.inject([]) { |array, r| 
+        array << r.segments.inject("") { |str,s| str << s.to_s }
+      }
 
       def self.included(base)
         base.class_eval do
-          after_save    :retire_old_published_versions
-          after_save    :create_file_on_filesystem
-          after_destroy :remove_file_from_filesystem
+          after_save :retire_old_published_versions
           
           self.acts_as_versioned
           acts_as_tree
@@ -16,19 +16,21 @@ module Sandstone
           has_many :audits, :as => :record, :dependent => :destroy
           belongs_to :page_template
           belongs_to :editor
+
+          validates_presence_of   :status, :content
           validates_uniqueness_of :path
-          validates_presence_of :status, :content
         end
 
+        base.send(:include, Sandstone::Models::Caching)
         base.send(:include, InstanceMethods)
-        base.send(:extend, ClassMethods)
+        base.send(:extend,  ClassMethods)
       end
 
       module InstanceMethods
         STATUSES = ['new', 'pending', 'published']
 
         def layout
-          page_template ? page_template.name.tableize : 'public'
+          page_template ? "generated/#{page_template.name.underscore}" : 'public'
         end
 
         def draft=(value)
@@ -49,6 +51,15 @@ module Sandstone
             update_attributes(:content => filesystem_content, :status => 'new') if filesystem_content != content
           end
         end
+        
+        def could_have_parent?
+          unless self.parent_id
+            page_count = ::Page.count
+            page_count > 1 || self.new_record? && page_count == 1
+          else
+            true
+          end
+        end
 
         private
         def retire_old_published_versions
@@ -57,16 +68,6 @@ module Sandstone
 
         def page_filename 
           "#{::Page::PAGE_PATH}/#{path? ? path : '_root'}.html.erb"
-        end
-
-        def create_file_on_filesystem
-          File.open(page_filename, 'wb+') do |file|
-            file.puts content
-          end
-        end
-
-        def remove_file_from_filesystem
-          File.delete page_filename
         end
       end
 
