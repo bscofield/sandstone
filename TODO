@@ -1,0 +1,28 @@
+SOONEST
+x switch integration point from polymorphism to simple foreign key
+  x update documentation
+x refactor filesystem caching out of Page and PageTemplate into a single module
+- allow arbitrary metadata
+
+LATER
+- manage dynamic page content
+- manage content chunks within pages
+? patch render to allow render :sandstone => [path] (replacement for partials???)
+- document capistrano/vlad changes necessary to preserve generated content across deploys
+- namespace sandstone controllers (especially admin controllers)
+? namespace sandstone models
+- allow liquid for page templates
+- add rake tasks 
+  - clearing generated content
+  - ...
+- add generator options
+  - page tagging
+  - ...
+- allow role management
+- make acts_as_versioned optional...
+  - document dependency until accomplished
+- make acts_as_tree optional...
+  - document dependency until accomplished
+- make javascript optionally unobtrusive
+  - generator option to include lowpro?
+- provide alternatives to filesystem caching
