@@ -1,7 +1,7 @@
 <li>
   <%= status_icon(page_listing) %>
   <%= link_to (h page_listing.title), sandstone_url(:path => page_listing.path) %>
-  <span class="url">http://qvisory.org/<%= h page_listing.path %></span>
+  <span class="url">http://<%= request.host %>/<%= h page_listing.path %></span>
   
   <span class="actions">
     <%= link_to 'create a child page', new_page_path(:parent_id => page_listing.id) %> |
