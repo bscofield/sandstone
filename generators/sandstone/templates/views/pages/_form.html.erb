@@ -79,4 +79,23 @@
     </div>
   </fieldset>
 </div>
+
+<div class="additional-fields">
+  <p><%= link_to_function 'edit page variables', 'new Effect.Appear("page-variables")' %></p>
+  <fieldset id="page-variables" style="display:none;">
+    <% page.page_variables.each do |var| %>
+    <div>
+      <%= text_field_tag "page[variable][#{var.id}][name]", var.name %>
+      <%= text_area_tag  "page[variable][#{var.id}][content]", var.content, :class => 'small' %>
+    </div>
+    <% end %>
+
+    <% (1..3).each do |i| %>
+    <div>
+      <%= text_field_tag "page[new_variable][#{i}][name]" %>
+      <%= text_area_tag  "page[new_variable][#{i}][content]", '', :class => 'small' %>
+    </div>
+    <% end %>
+  </fieldset>
+</div>
 <% end %>

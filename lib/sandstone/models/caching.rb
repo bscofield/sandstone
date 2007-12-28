@@ -12,13 +12,13 @@ module Sandstone
 
       module InstanceMethods
         def create_file_on_filesystem
-          File.open(layout_filename, 'wb+') do |file|
+          File.open(filename, 'wb+') do |file|
             file.puts content
           end
         end
 
         def remove_file_from_filesystem
-          File.delete layout_filename
+          File.delete filename
         end
       end
     end

@@ -22,6 +22,10 @@ module Sandstone
 
       module InstanceMethods
         private
+        def filename
+          layout_filename
+        end
+        
         def layout_filename 
           "#{::PageTemplate::LAYOUT_PATH}/#{name.underscore}.html.erb"
         end

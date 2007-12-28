@@ -14,6 +14,7 @@ module Sandstone
           acts_as_tree
 
           has_many :audits, :as => :record, :dependent => :destroy
+          has_many :page_variables, :dependent => :destroy
           belongs_to :page_template
           belongs_to :editor
 
@@ -43,6 +44,32 @@ module Sandstone
 
         def publish=(value)
           self.status = 'published'
+        end
+        
+        def var(name)
+          @variables ||= self.page_variables
+          variable = @variables.detect { |variable| variable.name == name }
+          variable.content if variable
+        end
+        
+        def variable=(arr)
+          arr.each do |id, record|
+            unless record['name'].blank?
+              self.page_variables.find(id).update_attributes(record)
+            else
+              self.page_variables.find(id).destroy
+            end
+          end
+        end
+        
+        def new_variable=(arr)
+          arr.each do |index, record|
+            self.page_variables.create(record) unless record['name'].blank?
+          end
+        end
+        
+        def filename
+          page_filename
         end
         
         def load_content_from_filesystem
