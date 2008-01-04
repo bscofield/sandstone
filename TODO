@@ -26,3 +26,5 @@ LATER
 - make javascript optionally unobtrusive
   - generator option to include lowpro?
 - provide alternatives to filesystem caching
+- change namespacing to Resourceful::Sandstone
+- better error messaging when prereqs aren't present (AAV and AAT)
