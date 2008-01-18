@@ -46,10 +46,10 @@ module Sandstone
           self.status = 'published'
         end
         
-        def var(name)
+        def var(name, inherit = true)
           @variables ||= self.page_variables
           variable = @variables.detect { |variable| variable.name == name }
-          variable.content if variable
+          return variable ? variable.content : self.parent.var(name)
         end
         
         def variable=(arr)

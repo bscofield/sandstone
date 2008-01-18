@@ -46,6 +46,16 @@ module UnitTest
       page.publish = true
       assert_equal 'published', page.status
     end
+    
+    def test_page_variables_should_optionally_inherit
+      parent = Page.create :url => 'path'
+      parent.new_variable = {'name' => 'test', 'content' => 1}
+      child  = parent.children.new :url => 'path2'
+      assert_equal 1, child.var('test')   # inherited
+      assert_nil child.var('test', false) # stop inheritance
+      
+      child.new_variable = {'name' => 'test', 'content' => 2}
+      assert_equal 2, child.var('test')   # local value overrides
+    end
   end
-
 end
