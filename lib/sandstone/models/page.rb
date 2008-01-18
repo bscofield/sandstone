@@ -49,7 +49,12 @@ module Sandstone
         def var(name, inherit = true)
           @variables ||= self.page_variables
           variable = @variables.detect { |variable| variable.name == name }
-          return variable ? variable.content : self.parent.var(name)
+
+          if variable
+            variable.content
+          elsif inherit && self.parent
+            self.parent.var(name, inherit) if self.parent
+          end
         end
         
         def variable=(arr)
