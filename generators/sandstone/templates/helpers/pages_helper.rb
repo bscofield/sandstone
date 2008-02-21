@@ -2,9 +2,9 @@ module PagesHelper
   include SandstoneHelper
 
   def parent_pages_for(page)
-    pages = Page.find(:all, :select => 'id, title').map {|p| [p.title, p.id]}
-    pages.reject {|p| p[1] == page.id} unless page.new_record?
-    pages
+    conditions = page.new_record? ? nil : ['id != ?', page.id]
+    pages = Page.find(:all, :select => 'id, title', :conditions => conditions).map {|p| [p.title, p.id]}
+    [['none', '']] + pages
   end
 
   def editors_for(page)

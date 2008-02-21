@@ -8,6 +8,8 @@ Dependencies
 ============
 You must be running acts_as_versioned and acts_as_tree to use Sandstone.
 
+The generated tests also require the tester_xtreme plugin, which you can install from http://svn.extendviget.com/lab/trunk/plugins/tester_xtreme.
+
 You do not need to use the RESTful Authentication plugin to use Sandstone, but it will help. At a mininum, you must define the methods +logged_in?+, +current_user+, and +access_denied+ in +ApplicationController+. 
 
 +current_user+ must return an object that can match up with Sandstone's +editor+ object. +access_denied+ should handle redirection and messaging when a non-editor tried to visit an administrative page.

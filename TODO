@@ -3,8 +3,10 @@ x switch integration point from polymorphism to simple foreign key
   x update documentation
 x refactor filesystem caching out of Page and PageTemplate into a single module
 - allow arbitrary metadata
+- add helper tests
 
 LATER
+- use acts_as_state_machine for workflow
 - manage dynamic page content
 - manage content chunks within pages
 ? patch render to allow render :sandstone => [path] (replacement for partials???)
