@@ -18,7 +18,7 @@ module Sandstone
         end
 
         def remove_file_from_filesystem
-          File.delete filename
+          File.delete(filename) if File.exists?(filename)
         end
       end
     end
